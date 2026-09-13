@@ -1,5 +1,6 @@
 import requests
 import json
+from datetime import datetime
 
 cities = {
     "Indore": (22.7196, 75.8577),
@@ -11,8 +12,7 @@ cities = {
 
 weather_data = []
 
-# Historical date
-date = "2026-09-01"
+date = datetime.now().strftime("%Y-%m-%d")
 
 for city, (latitude, longitude) in cities.items():
 
@@ -25,10 +25,10 @@ for city, (latitude, longitude) in cities.items():
     )
 
     response = requests.get(url, timeout=10)
-response.raise_for_status()
-data = response.json()
+    response.raise_for_status()
+    data = response.json()
 
-weather_data.append({
+    weather_data.append({
         "city": city,
         "data": data
     })
